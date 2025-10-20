@@ -1,0 +1,12 @@
+/Users/pc/Desktop/Proyects to sell/WebsiteBackend/src/main/java/com/tuempresa/inventario/model/Cliente.java
+/Users/pc/Desktop/Proyects to sell/WebsiteBackend/src/main/java/com/tuempresa/inventario/model/ProductModel.java
+/Users/pc/Desktop/Proyects to sell/WebsiteBackend/src/main/java/com/tuempresa/inventario/redis/RedisConfig.java
+/Users/pc/Desktop/Proyects to sell/WebsiteBackend/src/main/java/com/tuempresa/inventario/controller/DTO/ClientRegistrationRequest.java
+/Users/pc/Desktop/Proyects to sell/WebsiteBackend/src/main/java/com/tuempresa/inventario/service/ProductService.java
+/Users/pc/Desktop/Proyects to sell/WebsiteBackend/src/main/java/com/WebsiteBackendApplication.java
+/Users/pc/Desktop/Proyects to sell/WebsiteBackend/src/main/java/com/tuempresa/inventario/service/ClientService.java
+/Users/pc/Desktop/Proyects to sell/WebsiteBackend/src/main/java/com/tuempresa/inventario/repository/ClientRepo.java
+/Users/pc/Desktop/Proyects to sell/WebsiteBackend/src/main/java/com/tuempresa/inventario/redis/CacheService.java
+/Users/pc/Desktop/Proyects to sell/WebsiteBackend/src/main/java/com/tuempresa/inventario/repository/ProductRepo.java
+/Users/pc/Desktop/Proyects to sell/WebsiteBackend/src/main/java/com/tuempresa/inventario/controller/ProductController.java
+/Users/pc/Desktop/Proyects to sell/WebsiteBackend/src/main/java/com/tuempresa/inventario/controller/ClientController.java
