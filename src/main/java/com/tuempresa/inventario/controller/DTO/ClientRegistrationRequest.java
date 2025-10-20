@@ -1,29 +1,24 @@
-package com.tuempresa.inventario.model;
+package com.tuempresa.inventario.controller.dto; // 💡 ¡Asegúrate que el paquete sea este!
 
-import jakarta.persistence.*;
+public class ClientRegistrationRequest {
 
-@Entity
-@Table(name = "clientes")
-public class Cliente {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String tipoCuenta; // admin, socio, regular
+    private String accountType;
     private String cedula;
     private String nombre;
     private String email;
     private String celular;
-    private String rnc;
+    private String password;
+    private String rnc; 
     private String numEmpleado;
 
-    // Getters y setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    // Constructor vacío
+    public ClientRegistrationRequest() {
+    }
 
-    public String getTipoCuenta() { return tipoCuenta; }
-    public void setTipoCuenta(String tipoCuenta) { this.tipoCuenta = tipoCuenta; }
+    // Getters y Setters (Necesarios para que Spring mapee el JSON)
+
+    public String getAccountType() { return accountType; }
+    public void setAccountType(String accountType) { this.accountType = accountType; }
 
     public String getCedula() { return cedula; }
     public void setCedula(String cedula) { this.cedula = cedula; }
@@ -36,6 +31,9 @@ public class Cliente {
 
     public String getCelular() { return celular; }
     public void setCelular(String celular) { this.celular = celular; }
+
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 
     public String getRnc() { return rnc; }
     public void setRnc(String rnc) { this.rnc = rnc; }
