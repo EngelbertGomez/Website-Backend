@@ -1,4 +1,6 @@
 # Website-Backend
 Repositorio para el proyecto web, backend.
 
-update.
+update 
+
+gitignore updated, files from target are now being ignored.

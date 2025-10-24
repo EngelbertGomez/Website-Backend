@@ -1,34 +1,70 @@
 package com.tuempresa.inventario.controller;
 
-import com.tuempresa.inventario.controller.dto.ClientRegistrationRequest; // 💡 Importa el DTO
+import com.tuempresa.inventario.controller.dto.ClientRegistrationRequest; // Importa el DTO
+import com.tuempresa.inventario.service.ClientService; // Importa el servicio
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
-// Necesitas la anotación @RestController para que Spring sepa que esta clase maneja peticiones REST
+/**
+ * Controlador REST para manejar las operaciones relacionadas con Clientes.
+ * La ruta base para este controlador es /api/clients.
+ */
 @RestController
-@RequestMapping("/api/clients") // 💡 Define la base URL, el JS apunta a este path
-// @CrossOrigin es vital para permitir peticiones desde el frontend (que corre en el navegador/otro puerto)
-@CrossOrigin(origins = "*") // "*" es para permitir TODAS, luego puedes restringirlo a tu dominio de frontend.
+@RequestMapping("/api/clients") // Mantenemos esta ruta para que el JS funcione: http://localhost:8080/api/clients/register
+@CrossOrigin(origins = "*") // Permite la comunicación con tu frontend
 public class ClientController {
 
-    // 💡 Método de prueba para verificar la conexión
-    @PostMapping("/register")
-    public ResponseEntity<?> registerClient(@RequestBody ClientRegistrationRequest registrationRequest) {
-        
-        // --- PRUEBA DE CONEXIÓN ---
-        System.out.println("--- DATOS RECIBIDOS DEL FRONTEND ---");
-        System.out.println("Tipo de Cuenta: " + registrationRequest.getAccountType());
-        System.out.println("Nombre: " + registrationRequest.getNombre());
-        System.out.println("Email: " + registrationRequest.getEmail());
-        System.out.println("Cédula: " + registrationRequest.getCedula());
-        System.out.println("RNC (si aplica): " + registrationRequest.getRnc());
-        System.out.println("Número Empleado (si aplica): " + registrationRequest.getNumEmpleado());
-        System.out.println("--- FIN DATOS RECIBIDOS ---");
+    private final ClientService clientService;
 
-        // Retorna una respuesta de ÉXITO (código 200 OK)
-        return ResponseEntity.ok(Map.of("message", "Registro temporalmente exitoso. Conexión Backend OK."));
+    @Autowired
+    // Inyección de dependencia del ClientService
+    public ClientController(ClientService clientService) {
+        this.clientService = clientService;
     }
 
-    // Puedes agregar más métodos (endpoints) aquí más adelante
+    /**
+     * Endpoint de Health Check simple.
+     * Verifica si el servidor está activo y respondiendo.
+     * URL: http://localhost:8080/api/clients/status
+     */
+    @GetMapping("/status")
+    public ResponseEntity<String> checkStatus() {
+        return new ResponseEntity<>("Backend is Running (Status: OK)", HttpStatus.OK);
+    }
+    
+    /**
+     * Endpoint para registrar un nuevo cliente.
+     * URL: http://localhost:8080/api/clients/register
+     */
+    @PostMapping("/register")
+    public ResponseEntity<?> registerClient(@RequestBody ClientRegistrationRequest request) {
+        try {
+            // Llama al servicio para realizar el mapeo, encriptación y guardado en la DB
+            clientService.registerNewClient(request); 
+            
+            // Si el servicio no lanza excepción, el registro fue exitoso
+            // Usamos HttpStatus.CREATED (201) para indicar que un recurso fue creado
+            return new ResponseEntity<>(
+                Map.of("message", "Client registered successfully"), 
+                HttpStatus.CREATED
+            );
+        } catch (IllegalArgumentException e) {
+            // Maneja errores de validación, por ejemplo: email duplicado o datos faltantes
+            System.err.println("Registration error: " + e.getMessage());
+            return new ResponseEntity<>(
+                Map.of("message", "Error en el registro: " + e.getMessage()), 
+                HttpStatus.BAD_REQUEST // Código 400
+            );
+        } catch (Exception e) {
+            // Maneja cualquier otro error inesperado (ej: fallo de conexión a la DB)
+            e.printStackTrace(); // Imprime el stack trace para depuración
+            return new ResponseEntity<>(
+                Map.of("message", "Internal server error during registration: " + e.getMessage()), 
+                HttpStatus.INTERNAL_SERVER_ERROR // Código 500
+            );
+        }
+    }
 }
