@@ -1,12 +1,13 @@
+com/tuempresa/inventario/config/SecurityConfig.class
 ProductController.class
 com/tuempresa/inventario/redis/CacheService.class
 com/tuempresa/inventario/redis/RedisConfig.class
 ProductService.class
+com/tuempresa/inventario/repository/ClientRepo.class
 ProductRepo.class
 com/tuempresa/inventario/WebsiteBackendApplication.class
 com/tuempresa/inventario/model/Cliente.class
 com/tuempresa/inventario/controller/dto/ClientRegistrationRequest.class
-ClientService.class
 ProductModel.class
 com/tuempresa/inventario/controller/ClientController.class
-ClientRepo.class
+com/tuempresa/inventario/service/ClientService.class

@@ -2,6 +2,10 @@ package com.tuempresa.inventario.model;
 
 import jakarta.persistence.*;
 
+/**
+ * Entidad JPA que mapea la tabla 'clientes' en la base de datos (Supabase/PostgreSQL).
+ * Contiene todos los campos de registro de un cliente.
+ */
 @Entity
 @Table(name = "clientes")
 public class Cliente {
@@ -10,6 +14,7 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Campos de registro
     private String tipoCuenta; // admin, socio, regular
     private String cedula;
     private String nombre;
@@ -17,8 +22,15 @@ public class Cliente {
     private String celular;
     private String rnc;
     private String numEmpleado;
+    
+    // CAMPO AÑADIDO: NECESARIO PARA ALMACENAR LA CONTRASEÑA ENCRIPTADA
+    private String password; 
+
+    // Constructor vacío requerido por JPA
+    public Cliente() {}
 
     // Getters y setters
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -42,4 +54,8 @@ public class Cliente {
 
     public String getNumEmpleado() { return numEmpleado; }
     public void setNumEmpleado(String numEmpleado) { this.numEmpleado = numEmpleado; }
+
+    // GETTER Y SETTER AÑADIDOS PARA EL CAMPO PASSWORD
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 }
