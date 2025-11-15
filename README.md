@@ -1,5 +1,5 @@
 # Website-Backend
-Repositorio para el proyecto web, backend.
+Website's backend repository.
 
 update 
 
